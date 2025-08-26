@@ -79,7 +79,6 @@ public class ACMETrade {
         System.out.println("[9] Listar todos os países compradores");
     }
 
-
     private void cadastrarPais() {
         String nome = input.nextLine();
         String sigla = input.nextLine();
@@ -90,7 +89,6 @@ public class ACMETrade {
             System.out.println("1:" + sigla + ";" + nome);
         else
             System.out.println("1:erro-sigla repetida");
-
 
     }
 

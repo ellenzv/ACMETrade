@@ -1,16 +1,29 @@
 import java.util.ArrayList;
 
 public class Convencao {
-    private ArrayList<Acordo> Acordos;
+    private ArrayList<Acordo> acordos;
+    private Acordo acordo;
 
-    public Convencao(){
-        Acordos = new ArrayList<>();
+    public Convencao() {
+        acordos = new ArrayList<>();
     }
 
-    public Acordo consultarAcordo(int codigo){
-        return null;
+    public boolean adicionarAcordo(Acordo acordo) {
+        int codigo = acordo.getCodigo();
+        Acordo aux = consultarAcordoPeloCodigo(codigo);
+        if (aux == null) {
+            acordos.add(acordo);
+            return true;
+        } else
+            return false;
+
     }
-    public Acordo consultarAcordo(String sigla) {
+
+    public Acordo consultarAcordoPeloCodigo(int codigo) {
+        for (Acordo acordo : acordos) {
+            if (acordo.getCodigo() == codigo)
+                return acordo;
+        }
         return null;
     }
 }
