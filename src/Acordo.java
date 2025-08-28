@@ -3,6 +3,8 @@ public class Acordo {
     private int codigo;
     private String produto;
     private double taxa;
+    private Pais comprador;
+    private Pais vendedor;
 
     public int getCodigo() {
         return codigo;
@@ -16,9 +18,19 @@ public class Acordo {
         return taxa;
     }
 
+    public Pais getComprador() {
+        return comprador;
+    }
+
+    public Pais getVendedor() {
+        return vendedor;
+    }
+
     public Acordo(int codigo, String produto, double taxa, Pais comprador, Pais vendedor) {
         this.codigo = codigo;
         this.produto = produto;
         this.taxa = taxa;
+        this.comprador = comprador;
+        this.vendedor = vendedor;
     }
 }

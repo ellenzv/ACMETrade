@@ -11,7 +11,9 @@ public class ACMETrade {
     private PrintStream saidaPadrao = System.out;   // Guarda a saida padrao - tela (console)
     private final String nomeArquivoEntrada = "dadosin.txt";  // Nome do arquivo de entrada de dados
     private final String nomeArquivoSaida = "dadosout.txt";  // Nome do arquivo de saida de dados
-    private Federacao federacao;
+    private Federacao federacao = new Federacao();
+    private Convencao convencao = new Convencao();
+
 
     public ACMETrade() {
         redirecionaEntrada();    // Redireciona Entrada para arquivos
@@ -20,86 +22,80 @@ public class ACMETrade {
 
 
     public void executar() {
-        System.out.println("Seja bem-vindo(a) ao ACMETrade!" +
-                "Escolha a opção desejada no menu. Para sair digite -1");
+        cadastrarPais();
+        //     cadastrarAcordo();
+        //       consultarPaisPorSigla();
 
-        int opcao = 0;
-        while (opcao != -1) {
-            menu();
-            opcao = input.nextInt();
-            input.nextLine();
-
-            switch (opcao) {
-                case 0:
-                    break;
-                case 1:
-                    cadastrarPais();
-                    break;
-                case 2:
-                    cadastrarAcordo();
-                    break;
-                case 3:
-                    consultarPaisPorSigla();
-                    break;
-                case 4:
-                    consultarAcordoPeloCodigo();
-                    break;
-                case 5:
-                    consultarPaisSiglaComprador();
-                    break;
-                case 6:
-                    listarPeixesCompradosPorCliente();
-                    break;
-                case 7:
-                    removerAcordoPaisComprador();
-                    break;
-                case 8:
-                    listarTodosAcordos();
-                    break;
-                case 9:
-                    listarTodosPaisesCompradores();
-                    break;
-                default:
-                    System.out.println("Opção inválida!");
-            }
-        }
+//        consultarAcordoPeloCodigo();
+//        consultarPaisSiglaComprador();
+//        mudarNomePais();
+//        removerAcordoPaisComprador();
+//        listarTodosAcordos();
+//        listarTodosPaisesCompradores();
     }
 
-    public void menu() {
-        System.out.println("Menu de opcoes");
-        System.out.println("[-1] Sair");
-        System.out.println("[1] Cadastrar um país");
-        System.out.println("[2] Cadastrar um acordo");
-        System.out.println("[3] Consultar país por sigla");
-        System.out.println("[4] Consultar acordo pelo código");
-        System.out.println("[5] Consultar acordo pela sigla do comprador");
-        System.out.println("[6] Alterar nome de um país");
-        System.out.println("[7] Remover acordo de um país comprador");
-        System.out.println("[8] Listar todos os acordos");
-        System.out.println("[9] Listar todos os países compradores");
-    }
-
+    //1
     private void cadastrarPais() {
-        String nome = input.nextLine();
-        String sigla = input.nextLine();
-        Pais pais = new Pais(sigla, nome);
 
-        boolean resultado = federacao.adicionarPais(pais);
-        if (resultado)
-            System.out.println("1:" + sigla + ";" + nome);
-        else
-            System.out.println("1:erro-sigla repetida");
+        String sigla;
+        do {
+            sigla = input.nextLine();
 
+            if (!sigla.equals("-1")) {
+                String nome = input.nextLine();
+
+                Pais pais = new Pais(sigla, nome);
+
+                boolean resultado = federacao.adicionarPais(pais);
+
+                if (resultado)
+                    System.out.println("1:" + sigla + ";" + nome);
+                else
+                    System.out.println("1:erro-sigla repetida");
+            }
+        } while (!sigla.equals("-1"));
     }
 
+    //2
     private void cadastrarAcordo() {
-        int codigo = input.nextInt();
-        String produto = input.nextLine();
-        double taxa = input.nextDouble();
 
+        int codigo = 0;
+
+        do {
+            codigo = input.nextInt();
+
+            if (codigo != -1) {
+                String produto = input.nextLine();
+                double taxa = input.nextDouble();
+                String siglaComprador = input.nextLine();
+                String siglaVendedor = input.nextLine();
+
+                Pais paisComprador = this.federacao.consultarPaisPelaSigla(siglaComprador);
+                Pais paisVendedor = this.federacao.consultarPaisPelaSigla(siglaVendedor);
+
+                if (paisVendedor == null) {
+                    System.out.println("2:erro-vendedor inexistente");
+                }
+                if (paisComprador == null) {
+                    System.out.println("2:erro-vendedor inexistente");
+                }
+                if (convencao.consultarAcordoPeloCodigo(codigo) == null) {
+                    System.out.println("2:erro-codigo repetido");
+                }
+                Acordo acordo = new Acordo(codigo, produto, taxa, paisComprador, paisVendedor);
+
+                boolean resultado = convencao.adicionarAcordo(acordo);
+
+                if (resultado) {
+                    System.out.println("2:" + codigo + ";" + produto + ";" + taxa + ";"
+                            + siglaComprador + ";" + siglaVendedor);
+                }
+            }
+        } while (codigo != -1);
 
     }
 
+    //3
     private void consultarPaisPorSigla() {
         String sigla = input.nextLine();
         Pais pais = federacao.consultarPaisPelaSigla(sigla);
@@ -109,28 +105,36 @@ public class ACMETrade {
             System.out.println("3:" + sigla + ";" + pais.getNome());
     }
 
+    //4
     private void consultarAcordoPeloCodigo() {
-
+        int codigo = input.nextInt();
+        Acordo acordo = convencao.consultarAcordoPeloCodigo(codigo);
+        if (acordo == null) {
+            System.out.println("4:erro-codigo inexistente");
+        } else {
+            System.out.println("4:" + codigo + ";" + acordo.getProduto() + ";" + acordo.getTaxa() + ";"
+                    + acordo.getComprador() + ";" + acordo.getVendedor());
+        }
     }
 
     private void consultarPaisSiglaComprador() {
-
+        //TODO
     }
 
-    private void listarPeixesCompradosPorCliente() {
-
+    private void mudarNomePais() {
+        //TODO
     }
 
     private void removerAcordoPaisComprador() {
-
+        //TODO
     }
 
     private void listarTodosAcordos() {
-
+        //TODO
     }
 
     private void listarTodosPaisesCompradores() {
-
+        //TODO
     }
 
 

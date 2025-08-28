@@ -1,0 +1,7 @@
+BR
+Brasil
+PT
+Portugal
+US
+Estados Unidos da America
+-1

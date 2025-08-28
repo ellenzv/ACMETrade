@@ -4,6 +4,7 @@ public class Convencao {
     private ArrayList<Acordo> acordos;
     private Acordo acordo;
 
+
     public Convencao() {
         acordos = new ArrayList<>();
     }
@@ -26,4 +27,6 @@ public class Convencao {
         }
         return null;
     }
+
+
 }
