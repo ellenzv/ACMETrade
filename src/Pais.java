@@ -10,9 +10,21 @@ public class Pais {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public Pais(String sigla, String nome) {
         this.sigla = sigla;
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Pais{" +
+                "sigla='" + sigla + '\'' +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 
 

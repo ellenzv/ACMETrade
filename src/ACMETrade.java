@@ -23,11 +23,10 @@ public class ACMETrade {
 
     public void executar() {
         cadastrarPais();
-        //     cadastrarAcordo();
-        //       consultarPaisPorSigla();
-
-//        consultarAcordoPeloCodigo();
-//        consultarPaisSiglaComprador();
+        cadastrarAcordo();
+        consultarPaisPorSigla();
+        consultarAcordoPeloCodigo();
+        consultarAcordoSiglaComprador();
 //        mudarNomePais();
 //        removerAcordoPaisComprador();
 //        listarTodosAcordos();
@@ -63,10 +62,12 @@ public class ACMETrade {
 
         do {
             codigo = input.nextInt();
+            input.nextLine();
 
             if (codigo != -1) {
                 String produto = input.nextLine();
                 double taxa = input.nextDouble();
+                input.nextLine();
                 String siglaComprador = input.nextLine();
                 String siglaVendedor = input.nextLine();
 
@@ -79,9 +80,7 @@ public class ACMETrade {
                 if (paisComprador == null) {
                     System.out.println("2:erro-vendedor inexistente");
                 }
-                if (convencao.consultarAcordoPeloCodigo(codigo) == null) {
-                    System.out.println("2:erro-codigo repetido");
-                }
+
                 Acordo acordo = new Acordo(codigo, produto, taxa, paisComprador, paisVendedor);
 
                 boolean resultado = convencao.adicionarAcordo(acordo);
@@ -89,6 +88,8 @@ public class ACMETrade {
                 if (resultado) {
                     System.out.println("2:" + codigo + ";" + produto + ";" + taxa + ";"
                             + siglaComprador + ";" + siglaVendedor);
+                } else {
+                    System.out.println("2:erro-codigo repetido");
                 }
             }
         } while (codigo != -1);
@@ -108,21 +109,37 @@ public class ACMETrade {
     //4
     private void consultarAcordoPeloCodigo() {
         int codigo = input.nextInt();
+        input.nextLine();
         Acordo acordo = convencao.consultarAcordoPeloCodigo(codigo);
         if (acordo == null) {
             System.out.println("4:erro-codigo inexistente");
         } else {
             System.out.println("4:" + codigo + ";" + acordo.getProduto() + ";" + acordo.getTaxa() + ";"
-                    + acordo.getComprador() + ";" + acordo.getVendedor());
+                    + acordo.getComprador().getSigla() + ";" + acordo.getVendedor().getSigla());
         }
     }
 
-    private void consultarPaisSiglaComprador() {
-        //TODO
+    //5
+    private void consultarAcordoSiglaComprador() {
+        String sigla = input.nextLine();
+        Acordo acordo = convencao.consultarAcordoSiglaComprador(sigla);
+        if (acordo == null)
+            System.out.println("3:erro-sigla inexistente.");
+        else
+            System.out.println("5:" + acordo.getCodigo() + ";" + acordo.getProduto() + ";" + acordo.getTaxa() +
+                    ";" + acordo.getComprador().getSigla() + ";" + acordo.getVendedor().getSigla());
     }
 
+    //6
     private void mudarNomePais() {
-        //TODO
+     String sigla = input.nextLine();
+     Pais pais = federacao.consultarPaisPelaSigla(sigla);
+
+     if (pais == null)
+         System.out.println("6:erro-sigla inexistente");
+     else
+        pais = federacao.alterarNomePais(sigla);
+        System.out.println("6:"+sigla+";"+pais.getNome()+";");
     }
 
     private void removerAcordoPaisComprador() {
@@ -149,8 +166,6 @@ public class ACMETrade {
         input.useLocale(Locale.ENGLISH);   // Ajusta para leitura para ponto decimal
     }
 
-    // Redireciona Saida de dados para arquivos em vez da tela (terminal)
-    // Chame este metodo para redirecionar a escrita de dados para arquivos
     private void redirecionaSaida() {
         try {
             PrintStream streamSaida = new PrintStream(new File(nomeArquivoSaida), Charset.forName("UTF-8"));
@@ -161,14 +176,10 @@ public class ACMETrade {
         Locale.setDefault(Locale.ENGLISH);   // Ajusta para ponto decimal
     }
 
-    // Restaura Entrada padrao para o teclado
-    // Chame este metodo para retornar a leitura de dados para o teclado
     private void restauraEntrada() {
         input = new Scanner(System.in);
     }
 
-    // Restaura Saida padrao para a tela (terminal)
-    // Chame este metodo para retornar a escrita de dados para a tela
     private void restauraSaida() {
         System.setOut(saidaPadrao);
     }

@@ -28,5 +28,13 @@ public class Convencao {
         return null;
     }
 
+    public Acordo consultarAcordoSiglaComprador(String sigla) {
+        for (Acordo acordo : acordos)
+            if (acordo.getComprador().getSigla().equals(sigla)) {
+                return acordo;
+            }
+        return null;
+    }
+
 
 }
