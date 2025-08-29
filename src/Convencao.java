@@ -1,4 +1,6 @@
+import javax.accessibility.AccessibleRole;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Convencao {
     private ArrayList<Acordo> acordos;
@@ -36,5 +38,14 @@ public class Convencao {
         return null;
     }
 
+    public ArrayList<Acordo> listarTodosAcordos() {
+        ArrayList<Acordo> aux = new ArrayList<>();
+
+        for(int i=0; i< acordos.size(); i++) {
+            Acordo acordo = acordos.get(i);
+            aux.add(acordo);
+        }
+        return aux;
+    }
 
 }

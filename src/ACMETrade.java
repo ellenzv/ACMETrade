@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -27,9 +28,9 @@ public class ACMETrade {
         consultarPaisPorSigla();
         consultarAcordoPeloCodigo();
         consultarAcordoSiglaComprador();
-//        mudarNomePais();
+        mudarNomePais();
 //        removerAcordoPaisComprador();
-//        listarTodosAcordos();
+        listarTodosAcordos();
 //        listarTodosPaisesCompradores();
     }
 
@@ -132,22 +133,41 @@ public class ACMETrade {
 
     //6
     private void mudarNomePais() {
-     String sigla = input.nextLine();
-     Pais pais = federacao.consultarPaisPelaSigla(sigla);
+        String sigla = input.nextLine();
+        String novoNome = input.nextLine();
+        Pais pais = federacao.consultarPaisPelaSigla(sigla);
 
-     if (pais == null)
-         System.out.println("6:erro-sigla inexistente");
-     else
-        pais = federacao.alterarNomePais(sigla);
-        System.out.println("6:"+sigla+";"+pais.getNome()+";");
+        if (pais == null)
+            System.out.println("6:erro-sigla inexistente");
+        else {
+            System.out.println("6:" + sigla + ";" + novoNome);
+        }
     }
 
+    //7
     private void removerAcordoPaisComprador() {
-        //TODO
+        String sigla = input.nextLine();
+        Acordo acordo = convencao.consultarAcordoSiglaComprador(sigla);
+        if (acordo == null)
+            System.out.println("7:erro-nenhum acordo encontrado");
+
     }
 
+    //8
     private void listarTodosAcordos() {
-        //TODO
+        ArrayList<Acordo> acordos = convencao.listarTodosAcordos();
+        if (acordos.isEmpty())
+            System.out.println("“8:erro-nenhum acordo cadastrado");
+        else {
+            for (int i = 0; i < acordos.size(); i++) {
+                Acordo acordo = acordos.get(i);
+                System.out.println("8:" + acordo.getCodigo() + ";"
+                        + acordo.getProduto() + ";"
+                        + acordo.getTaxa() + ";"
+                        + acordo.getComprador().getSigla() + ";"
+                        + acordo.getVendedor().getSigla());
+            }
+        }
     }
 
     private void listarTodosPaisesCompradores() {
