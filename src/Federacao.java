@@ -18,6 +18,7 @@ public class Federacao {
             return false;
 
     }
+    
     public Pais consultarPaisPelaSigla(String sigla) {
         for (Pais pais : paises) {
             if (pais.getSigla().equalsIgnoreCase(sigla))
