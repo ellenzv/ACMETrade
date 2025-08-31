@@ -29,9 +29,9 @@ public class ACMETrade {
         consultarAcordoPeloCodigo();
         consultarAcordoSiglaComprador();
         mudarNomePais();
-//        removerAcordoPaisComprador();
+        removerAcordoPaisComprador();
         listarTodosAcordos();
-//        listarTodosPaisesCompradores();
+        listarPaisesVendedores();
     }
 
     //1
@@ -79,7 +79,7 @@ public class ACMETrade {
                     System.out.println("2:erro-vendedor inexistente");
                 }
                 if (paisComprador == null) {
-                    System.out.println("2:erro-vendedor inexistente");
+                    System.out.println("2:erro-comprador inexistente");
                 }
 
                 Acordo acordo = new Acordo(codigo, produto, taxa, paisComprador, paisVendedor);
@@ -125,7 +125,7 @@ public class ACMETrade {
         String sigla = input.nextLine();
         Acordo acordo = convencao.consultarAcordoSiglaComprador(sigla);
         if (acordo == null)
-            System.out.println("3:erro-sigla inexistente.");
+            System.out.println("5:erro-sigla inexistente");
         else
             System.out.println("5:" + acordo.getCodigo() + ";" + acordo.getProduto() + ";" + acordo.getTaxa() +
                     ";" + acordo.getComprador().getSigla() + ";" + acordo.getVendedor().getSigla());
@@ -150,6 +150,10 @@ public class ACMETrade {
         Acordo acordo = convencao.consultarAcordoSiglaComprador(sigla);
         if (acordo == null)
             System.out.println("7:erro-nenhum acordo encontrado");
+        else {
+            convencao.removerAcordoPaisComprador(sigla);
+            System.out.println("7:acordos removidos");
+        }
 
     }
 
@@ -157,7 +161,7 @@ public class ACMETrade {
     private void listarTodosAcordos() {
         ArrayList<Acordo> acordos = convencao.listarTodosAcordos();
         if (acordos.isEmpty())
-            System.out.println("“8:erro-nenhum acordo cadastrado");
+            System.out.println("8:erro-nenhum acordo cadastrado");
         else {
             for (int i = 0; i < acordos.size(); i++) {
                 Acordo acordo = acordos.get(i);
@@ -170,10 +174,18 @@ public class ACMETrade {
         }
     }
 
-    private void listarTodosPaisesCompradores() {
-        //TODO
-    }
+    //9
+    private void listarPaisesVendedores() {
+        ArrayList<Pais> paisesVendedores = convencao.listarPaisesVendedores();
 
+            if (paisesVendedores.isEmpty())
+                System.out.println("9:erro-nenhum país encontrado");
+            else {
+                for(Pais pais : paisesVendedores){
+                    System.out.println("9:"+pais.getSigla()+";"+pais.getNome());
+            }
+        }
+    }
 
     private void redirecionaEntrada() {
         try {

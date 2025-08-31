@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Federacao {
     private ArrayList<Pais> paises;
@@ -25,13 +26,7 @@ public class Federacao {
         }
         return null;
     }
-    public Pais alterarNomePais(String sigla){
-        for (Pais pais : paises){
-            if(pais.getSigla().equalsIgnoreCase(sigla))
-                pais.setNome(pais.getNome());
-            return pais;
-        }
-        return null;
-    }
+
+
 
 }

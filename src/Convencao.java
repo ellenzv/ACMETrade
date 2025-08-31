@@ -1,11 +1,7 @@
-import javax.accessibility.AccessibleRole;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Convencao {
     private ArrayList<Acordo> acordos;
-    private Acordo acordo;
-
 
     public Convencao() {
         acordos = new ArrayList<>();
@@ -37,15 +33,53 @@ public class Convencao {
             }
         return null;
     }
+    
+    public Acordo consultarAcordoSiglaVendedor(String sigla) {
+        for (Acordo acordo : acordos)
+            if (acordo.getVendedor().getSigla().equals(sigla)) {
+                return acordo;
+            }
+        return null;
+    }
+
+    public void removerAcordoPaisComprador(String sigla) {
+        for (Acordo acordo : new ArrayList<>(acordos)) {
+            if (acordo.getComprador().getSigla().equalsIgnoreCase(sigla)) {
+                acordos.remove(acordo);
+            }
+        }
+    }
 
     public ArrayList<Acordo> listarTodosAcordos() {
         ArrayList<Acordo> aux = new ArrayList<>();
 
-        for(int i=0; i< acordos.size(); i++) {
+        for (int i = 0; i < acordos.size(); i++) {
             Acordo acordo = acordos.get(i);
             aux.add(acordo);
         }
         return aux;
     }
 
+    public ArrayList<Pais> listarPaisesVendedores() {
+        ArrayList<Pais> vendedores = new ArrayList<>();
+        for (Acordo acordo : acordos) {
+            Pais vendedor = acordo.getVendedor();
+            boolean jaAdicionado = false;
+            for (Pais pais : vendedores) {
+                if (pais.getSigla().equalsIgnoreCase(vendedor.getSigla())) {
+                    jaAdicionado = true;
+                    break;
+                }
+            }
+            if (!jaAdicionado) {
+                vendedores.add(vendedor);
+            }
+        }
+        return vendedores;
+    }
 }
+
+
+
+
+

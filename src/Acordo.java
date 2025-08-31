@@ -4,7 +4,6 @@ public class Acordo {
     private String produto;
     private double taxa;
     private Pais comprador;
-
     private Pais vendedor;
 
     public int getCodigo() {
