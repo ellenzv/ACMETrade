@@ -53,30 +53,34 @@ public class Convencao {
     }
 
     public Pais maiorQuantidadeAcordosVendedor() {
-        Federacao federecao = new Federacao();
-
-        if (acordos.isEmpty())
+        if (acordos.isEmpty()) {
             return null;
-
-        ArrayList<Pais> vendedores = federecao.listarPaisesVendedores();
+        }
 
         Pais maisVendedor = null;
         int maiorQtde = 0;
 
-        for (Pais vendedor : vendedores) {
+        for (int i = 0; i < acordos.size(); i++) {
+            Acordo acordoAtual = acordos.get(i);
+            Pais vendedorAtual = acordoAtual.getVendedor();
+
             int contador = 0;
 
-            for (Acordo acordo : acordos) {
-                if (acordo.getVendedor().getSigla().equalsIgnoreCase(vendedor.getSigla())) {
+            for (int j = 0; j < acordos.size(); j++) {
+                Acordo acordoComparado = acordos.get(j);
+                Pais vendedorComparado = acordoComparado.getVendedor();
+
+                if (vendedorAtual.getSigla().equalsIgnoreCase(vendedorComparado.getSigla())) {
                     contador++;
                 }
             }
 
             if (contador > maiorQtde) {
                 maiorQtde = contador;
-                maisVendedor = vendedor;
+                maisVendedor = vendedorAtual;
             }
         }
+
         return maisVendedor;
     }
 

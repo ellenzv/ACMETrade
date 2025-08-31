@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class ACMETrade {
     private Scanner input = new Scanner(System.in);  // Atributo para entrada padrao (teclado)
-    private PrintStream saidaPadrao = System.out;   // Guarda a saida padrao - tela (console)
     private final String nomeArquivoEntrada = "dadosin.txt";  // Nome do arquivo de entrada de dados
     private final String nomeArquivoSaida = "dadosout.txt";  // Nome do arquivo de saida de dados
     private Federacao federacao = new Federacao();
@@ -193,7 +192,7 @@ public class ACMETrade {
     }
 
     //10
-    public void vendedorMaiorQuantidadeAcordos(){
+    private void vendedorMaiorQuantidadeAcordos(){
         Pais pais = convencao.maiorQuantidadeAcordosVendedor();
         if(pais == null)
             System.out.println("10:erro-nenhum país encontrado.");
@@ -202,6 +201,8 @@ public class ACMETrade {
             System.out.println("10:"+pais.getSigla()+";"+pais.getNome()+";"+qtdAcordo);
         }
     }
+
+    //Redirecionamento de entrada e saída
 
     private void redirecionaEntrada() {
         try {
@@ -223,6 +224,4 @@ public class ACMETrade {
         }
         Locale.setDefault(Locale.ENGLISH);   // Ajusta para ponto decimal
     }
-
-
 }
