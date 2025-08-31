@@ -9,7 +9,7 @@ public class Convencao {
 
     public boolean adicionarAcordo(Acordo acordo) {
         int codigo = acordo.getCodigo();
-        Acordo aux = consultarAcordoPeloCodigo(codigo);
+        Acordo aux = consultarAcordo(codigo);
         if (aux == null) {
             acordos.add(acordo);
             return true;
@@ -18,7 +18,7 @@ public class Convencao {
 
     }
 
-    public Acordo consultarAcordoPeloCodigo(int codigo) {
+    public Acordo consultarAcordo(int codigo) {
         for (Acordo acordo : acordos) {
             if (acordo.getCodigo() == codigo)
                 return acordo;
@@ -26,17 +26,9 @@ public class Convencao {
         return null;
     }
 
-    public Acordo consultarAcordoSiglaComprador(String sigla) {
+    public Acordo consultarAcordo(String sigla) {
         for (Acordo acordo : acordos)
             if (acordo.getComprador().getSigla().equals(sigla)) {
-                return acordo;
-            }
-        return null;
-    }
-    
-    public Acordo consultarAcordoSiglaVendedor(String sigla) {
-        for (Acordo acordo : acordos)
-            if (acordo.getVendedor().getSigla().equals(sigla)) {
                 return acordo;
             }
         return null;

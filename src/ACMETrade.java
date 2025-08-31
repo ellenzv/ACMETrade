@@ -32,6 +32,7 @@ public class ACMETrade {
         removerAcordoPaisComprador();
         listarTodosAcordos();
         listarPaisesVendedores();
+        vendedorMaiorQuantidadeAcordos();
     }
 
     //1
@@ -69,17 +70,19 @@ public class ACMETrade {
                 String produto = input.nextLine();
                 double taxa = input.nextDouble();
                 input.nextLine();
-                String siglaComprador = input.nextLine();
                 String siglaVendedor = input.nextLine();
+                String siglaComprador = input.nextLine();
 
                 Pais paisComprador = this.federacao.consultarPaisPelaSigla(siglaComprador);
                 Pais paisVendedor = this.federacao.consultarPaisPelaSigla(siglaVendedor);
 
                 if (paisVendedor == null) {
                     System.out.println("2:erro-vendedor inexistente");
+                    continue;
                 }
                 if (paisComprador == null) {
                     System.out.println("2:erro-comprador inexistente");
+                    continue;
                 }
 
                 Acordo acordo = new Acordo(codigo, produto, taxa, paisComprador, paisVendedor);
@@ -111,7 +114,7 @@ public class ACMETrade {
     private void consultarAcordoPeloCodigo() {
         int codigo = input.nextInt();
         input.nextLine();
-        Acordo acordo = convencao.consultarAcordoPeloCodigo(codigo);
+        Acordo acordo = convencao.consultarAcordo(codigo);
         if (acordo == null) {
             System.out.println("4:erro-codigo inexistente");
         } else {
@@ -123,7 +126,7 @@ public class ACMETrade {
     //5
     private void consultarAcordoSiglaComprador() {
         String sigla = input.nextLine();
-        Acordo acordo = convencao.consultarAcordoSiglaComprador(sigla);
+        Acordo acordo = convencao.consultarAcordo(sigla);
         if (acordo == null)
             System.out.println("5:erro-sigla inexistente");
         else
@@ -147,7 +150,7 @@ public class ACMETrade {
     //7
     private void removerAcordoPaisComprador() {
         String sigla = input.nextLine();
-        Acordo acordo = convencao.consultarAcordoSiglaComprador(sigla);
+        Acordo acordo = convencao.consultarAcordo(sigla);
         if (acordo == null)
             System.out.println("7:erro-nenhum acordo encontrado");
         else {
@@ -185,6 +188,11 @@ public class ACMETrade {
                     System.out.println("9:"+pais.getSigla()+";"+pais.getNome());
             }
         }
+    }
+
+    //10
+    public void vendedorMaiorQuantidadeAcordos(){
+
     }
 
     private void redirecionaEntrada() {
