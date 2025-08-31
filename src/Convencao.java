@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Convencao {
@@ -15,7 +16,6 @@ public class Convencao {
             return true;
         } else
             return false;
-
     }
 
     public Acordo consultarAcordo(int codigo) {
@@ -52,24 +52,46 @@ public class Convencao {
         return aux;
     }
 
-    public ArrayList<Pais> listarPaisesVendedores() {
-        ArrayList<Pais> vendedores = new ArrayList<>();
-        for (Acordo acordo : acordos) {
-            Pais vendedor = acordo.getVendedor();
-            boolean jaAdicionado = false;
-            for (Pais pais : vendedores) {
-                if (pais.getSigla().equalsIgnoreCase(vendedor.getSigla())) {
-                    jaAdicionado = true;
-                    break;
+    public Pais maiorQuantidadeAcordosVendedor() {
+        Federacao federecao = new Federacao();
+
+        if (acordos.isEmpty())
+            return null;
+
+        ArrayList<Pais> vendedores = federecao.listarPaisesVendedores();
+
+        Pais maisVendedor = null;
+        int maiorQtde = 0;
+
+        for (Pais vendedor : vendedores) {
+            int contador = 0;
+
+            for (Acordo acordo : acordos) {
+                if (acordo.getVendedor().getSigla().equalsIgnoreCase(vendedor.getSigla())) {
+                    contador++;
                 }
             }
-            if (!jaAdicionado) {
-                vendedores.add(vendedor);
+
+            if (contador > maiorQtde) {
+                maiorQtde = contador;
+                maisVendedor = vendedor;
             }
         }
-        return vendedores;
+        return maisVendedor;
+    }
+
+    public int quantidadeAcordoVendedor(Pais vendedor) {
+        int contador = 0;
+        for (Acordo acordo : acordos) {
+            if (acordo.getVendedor().getSigla().equalsIgnoreCase(vendedor.getSigla())) {
+                contador++;
+            }
+        }
+        return contador;
     }
 }
+
+
 
 
 

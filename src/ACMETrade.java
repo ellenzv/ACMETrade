@@ -15,7 +15,6 @@ public class ACMETrade {
     private Federacao federacao = new Federacao();
     private Convencao convencao = new Convencao();
 
-
     public ACMETrade() {
         redirecionaEntrada();    // Redireciona Entrada para arquivos
         redirecionaSaida();    // Redireciona Saida para arquivos
@@ -70,8 +69,8 @@ public class ACMETrade {
                 String produto = input.nextLine();
                 double taxa = input.nextDouble();
                 input.nextLine();
-                String siglaVendedor = input.nextLine();
                 String siglaComprador = input.nextLine();
+                String siglaVendedor = input.nextLine();
 
                 Pais paisComprador = this.federacao.consultarPaisPelaSigla(siglaComprador);
                 Pais paisVendedor = this.federacao.consultarPaisPelaSigla(siglaVendedor);
@@ -79,6 +78,8 @@ public class ACMETrade {
                 if (paisVendedor == null) {
                     System.out.println("2:erro-vendedor inexistente");
                     continue;
+                } else {
+                    federacao.adicionarPaisVendedor(paisVendedor);
                 }
                 if (paisComprador == null) {
                     System.out.println("2:erro-comprador inexistente");
@@ -143,6 +144,7 @@ public class ACMETrade {
         if (pais == null)
             System.out.println("6:erro-sigla inexistente");
         else {
+            pais.setNome(novoNome);
             System.out.println("6:" + sigla + ";" + novoNome);
         }
     }
@@ -179,7 +181,7 @@ public class ACMETrade {
 
     //9
     private void listarPaisesVendedores() {
-        ArrayList<Pais> paisesVendedores = convencao.listarPaisesVendedores();
+        ArrayList<Pais> paisesVendedores = federacao.listarPaisesVendedores();
 
             if (paisesVendedores.isEmpty())
                 System.out.println("9:erro-nenhum país encontrado");
@@ -192,7 +194,13 @@ public class ACMETrade {
 
     //10
     public void vendedorMaiorQuantidadeAcordos(){
-
+        Pais pais = convencao.maiorQuantidadeAcordosVendedor();
+        if(pais == null)
+            System.out.println("10:erro-nenhum país encontrado.");
+        else{
+            int qtdAcordo = convencao.quantidadeAcordoVendedor(pais);
+            System.out.println("10:"+pais.getSigla()+";"+pais.getNome()+";"+qtdAcordo);
+        }
     }
 
     private void redirecionaEntrada() {
@@ -216,11 +224,5 @@ public class ACMETrade {
         Locale.setDefault(Locale.ENGLISH);   // Ajusta para ponto decimal
     }
 
-    private void restauraEntrada() {
-        input = new Scanner(System.in);
-    }
 
-    private void restauraSaida() {
-        System.setOut(saidaPadrao);
-    }
 }
