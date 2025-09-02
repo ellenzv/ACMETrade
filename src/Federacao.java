@@ -38,14 +38,17 @@ public class Federacao {
         vendedores.add(paisVendedor);
     }
 
-    public ArrayList<Pais> listarPaisesVendedores(){
-        ArrayList<Pais> aux = new ArrayList<>();
+    public ArrayList<Pais> listarPaisesNaoVendedores() {
+        ArrayList<Pais> paisesNaoVendedores = new ArrayList<>();
 
-        for (int i = 0; i < vendedores.size(); i++) {
-            Pais paisVendedor = vendedores.get(i);
-            aux.add(paisVendedor);
+        for (Pais pais : paises) {
+            if (!vendedores.contains(pais)) {
+                paisesNaoVendedores.add(pais);
+            }
         }
-        return aux;
+        return paisesNaoVendedores;
     }
 
 }
+
+

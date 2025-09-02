@@ -1,0 +1,12 @@
+1:BR;Brasil
+1:erro-sigla repetida
+2:erro-vendedor inexistente
+2:erro-comprador inexistente
+3:erro-sigla inexistente.
+4:erro-codigo inexistente
+5:erro-sigla inexistente
+6:erro-sigla inexistente
+7:erro-nenhum acordo encontrado
+8:erro-nenhum acordo cadastrado
+9:BR;Brasil
+10:erro-nenhum país encontrado.

@@ -35,29 +35,26 @@ public class Convencao {
     }
 
     public void removerAcordoPaisComprador(String sigla) {
-        for (Acordo acordo : new ArrayList<>(acordos)) {
-            if (acordo.getComprador().getSigla().equalsIgnoreCase(sigla)) {
-                acordos.remove(acordo);
-            }
-        }
+        acordos.removeIf(acordo -> acordo.getComprador().getSigla().equalsIgnoreCase(sigla));
     }
 
     public ArrayList<Acordo> listarTodosAcordos() {
         ArrayList<Acordo> aux = new ArrayList<>();
 
-        for (int i = 0; i < acordos.size(); i++) {
-            Acordo acordo = acordos.get(i);
+        for (Acordo acordo : acordos) {
             aux.add(acordo);
         }
         return aux;
     }
+
+
 
     public Pais maiorQuantidadeAcordosVendedor() {
         if (acordos.isEmpty()) {
             return null;
         }
 
-        Pais maisVendedor = null;
+        Pais paisMaiorVendas = null;
         int maiorQtde = 0;
 
         for (int i = 0; i < acordos.size(); i++) {
@@ -77,11 +74,11 @@ public class Convencao {
 
             if (contador > maiorQtde) {
                 maiorQtde = contador;
-                maisVendedor = vendedorAtual;
+                paisMaiorVendas = vendedorAtual;
             }
         }
 
-        return maisVendedor;
+        return paisMaiorVendas;
     }
 
     public int quantidadeAcordoVendedor(Pais vendedor) {

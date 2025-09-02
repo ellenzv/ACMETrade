@@ -29,7 +29,7 @@ public class ACMETrade {
         mudarNomePais();
         removerAcordoPaisComprador();
         listarTodosAcordos();
-        listarPaisesVendedores();
+        listarPaisesNaoVendedores();
         vendedorMaiorQuantidadeAcordos();
     }
 
@@ -77,8 +77,6 @@ public class ACMETrade {
                 if (paisVendedor == null) {
                     System.out.println("2:erro-vendedor inexistente");
                     continue;
-                } else {
-                    federacao.adicionarPaisVendedor(paisVendedor);
                 }
                 if (paisComprador == null) {
                     System.out.println("2:erro-comprador inexistente");
@@ -88,6 +86,7 @@ public class ACMETrade {
                 Acordo acordo = new Acordo(codigo, produto, taxa, paisComprador, paisVendedor);
 
                 boolean resultado = convencao.adicionarAcordo(acordo);
+                federacao.adicionarPaisVendedor(paisVendedor);
 
                 if (resultado) {
                     System.out.println("2:" + codigo + ";" + produto + ";" + taxa + ";"
@@ -179,13 +178,13 @@ public class ACMETrade {
     }
 
     //9
-    private void listarPaisesVendedores() {
-        ArrayList<Pais> paisesVendedores = federacao.listarPaisesVendedores();
+    private void listarPaisesNaoVendedores() {
+        ArrayList<Pais> paisesCompradores = federacao.listarPaisesNaoVendedores();
 
-            if (paisesVendedores.isEmpty())
+            if (paisesCompradores.isEmpty())
                 System.out.println("9:erro-nenhum país encontrado");
             else {
-                for(Pais pais : paisesVendedores){
+                for(Pais pais : paisesCompradores){
                     System.out.println("9:"+pais.getSigla()+";"+pais.getNome());
             }
         }
