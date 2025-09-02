@@ -6,6 +6,14 @@ public class Acordo {
     private Pais comprador;
     private Pais vendedor;
 
+    public Acordo(int codigo, String produto, double taxa, Pais comprador, Pais vendedor) {
+        this.codigo = codigo;
+        this.produto = produto;
+        this.taxa = taxa;
+        this.comprador = comprador;
+        this.vendedor = vendedor;
+    }
+
     public int getCodigo() {
         return codigo;
     }
@@ -26,13 +34,6 @@ public class Acordo {
         return vendedor;
     }
 
-    public Acordo(int codigo, String produto, double taxa, Pais comprador, Pais vendedor) {
-        this.codigo = codigo;
-        this.produto = produto;
-        this.taxa = taxa;
-        this.comprador = comprador;
-        this.vendedor = vendedor;
-    }
 
     @Override
     public String toString() {

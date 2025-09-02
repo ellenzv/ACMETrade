@@ -2,6 +2,11 @@ public class Pais {
     private String sigla;
     private String nome;
 
+    public Pais(String sigla, String nome) {
+        this.sigla = sigla;
+        this.nome = nome;
+    }
+
     public String getSigla() {
         return sigla;
     }
@@ -14,11 +19,6 @@ public class Pais {
         this.nome = nome;
     }
 
-    public Pais(String sigla, String nome) {
-        this.sigla = sigla;
-        this.nome = nome;
-    }
-
     @Override
     public String toString() {
         return "Pais{" +
@@ -26,6 +26,5 @@ public class Pais {
                 ", nome='" + nome + '\'' +
                 '}';
     }
-
 
 }

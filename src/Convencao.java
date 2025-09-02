@@ -45,7 +45,7 @@ public class Convencao {
         return aux;
     }
 
-    public Pais maiorQuantidadeAcordosVendedor() {
+    public Pais maiorVendedorEmAcordos() {
         if (acordos.isEmpty()) {
             return null;
         }
@@ -77,7 +77,7 @@ public class Convencao {
         return paisMaiorVendas;
     }
 
-    public int quantidadeAcordoVendedor(Pais vendedor) {
+    public int quantidadeAcordoMaiorVendedor(Pais vendedor) {
         int contador = 0;
         for (Acordo acordo : acordos) {
             if (acordo.getVendedor().getSigla().equalsIgnoreCase(vendedor.getSigla())) {

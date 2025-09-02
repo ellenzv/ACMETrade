@@ -30,7 +30,7 @@ public class ACMETrade {
         removerAcordoPaisComprador();
         listarTodosAcordos();
         listarPaisesNaoVendedores();
-        vendedorMaiorQuantidadeAcordos();
+        maiorVendedorEmAcordos();
     }
 
     //1
@@ -192,12 +192,12 @@ public class ACMETrade {
     }
 
     //10
-    private void vendedorMaiorQuantidadeAcordos() {
-        Pais pais = convencao.maiorQuantidadeAcordosVendedor();
+    private void maiorVendedorEmAcordos() {
+        Pais pais = convencao.maiorVendedorEmAcordos();
         if (pais == null)
             System.out.println("10:erro-nenhum país encontrado.");
         else {
-            int qtdAcordo = convencao.quantidadeAcordoVendedor(pais);
+            int qtdAcordo = convencao.quantidadeAcordoMaiorVendedor(pais);
             System.out.println("10:" + pais.getSigla() + ";" + pais.getNome() + ";" + qtdAcordo);
         }
     }
