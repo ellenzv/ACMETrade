@@ -41,13 +41,9 @@ public class Convencao {
     public ArrayList<Acordo> listarTodosAcordos() {
         ArrayList<Acordo> aux = new ArrayList<>();
 
-        for (Acordo acordo : acordos) {
-            aux.add(acordo);
-        }
+        aux.addAll(acordos);
         return aux;
     }
-
-
 
     public Pais maiorQuantidadeAcordosVendedor() {
         if (acordos.isEmpty()) {

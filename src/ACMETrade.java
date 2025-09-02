@@ -86,6 +86,7 @@ public class ACMETrade {
                 Acordo acordo = new Acordo(codigo, produto, taxa, paisComprador, paisVendedor);
 
                 boolean resultado = convencao.adicionarAcordo(acordo);
+
                 federacao.adicionarPaisVendedor(paisVendedor);
 
                 if (resultado) {
@@ -181,23 +182,23 @@ public class ACMETrade {
     private void listarPaisesNaoVendedores() {
         ArrayList<Pais> paisesCompradores = federacao.listarPaisesNaoVendedores();
 
-            if (paisesCompradores.isEmpty())
-                System.out.println("9:erro-nenhum país encontrado");
-            else {
-                for(Pais pais : paisesCompradores){
-                    System.out.println("9:"+pais.getSigla()+";"+pais.getNome());
+        if (paisesCompradores.isEmpty())
+            System.out.println("9:erro-nenhum país encontrado");
+        else {
+            for (Pais pais : paisesCompradores) {
+                System.out.println("9:" + pais.getSigla() + ";" + pais.getNome());
             }
         }
     }
 
     //10
-    private void vendedorMaiorQuantidadeAcordos(){
+    private void vendedorMaiorQuantidadeAcordos() {
         Pais pais = convencao.maiorQuantidadeAcordosVendedor();
-        if(pais == null)
+        if (pais == null)
             System.out.println("10:erro-nenhum país encontrado.");
-        else{
+        else {
             int qtdAcordo = convencao.quantidadeAcordoVendedor(pais);
-            System.out.println("10:"+pais.getSigla()+";"+pais.getNome()+";"+qtdAcordo);
+            System.out.println("10:" + pais.getSigla() + ";" + pais.getNome() + ";" + qtdAcordo);
         }
     }
 
